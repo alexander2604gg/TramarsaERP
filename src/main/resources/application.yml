@@ -3,9 +3,9 @@ server:
 
 datasource:
   driver-class-name: org.postgresql.Driver
-  url: ${DATASOURCE_URL}
-  username: ${DATASOURCE_USERNAME}
-  password: ${DATASOURCE_PASSWORD}
+  url: jdbc:postgresql://dpg-crkvvbm8ii6s73et7v1g-a.oregon-postgres.render.com:5432/tramarsa_erp
+  username: tramarsa_erp_user
+  password: y0bip0mPG2mh70x4fiUTY7vhsIWR9nf7
 
 jpa:
   properties:
@@ -21,6 +21,6 @@ jpa:
 security:
   jwt:
     private:
-      key: ${PRIVATE_KEY}
+      key: alexandersaul26
     user:
-      generator: ${USER_GENERATOR}
+      generator: alexandersaul
