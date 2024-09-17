@@ -1,16 +1,20 @@
-# Utilizar una imagen base de Java
-FROM openjdk:17-jdk-slim
+FROM maven:3.8.5-openjdk-17 AS build
 
-# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar el archivo JAR de la aplicación al contenedor
-COPY target/TramarsaERP.jar /app/TramarsaERP.jar
+COPY pom.xml .
+COPY src ./src
 
-# Exponer el puerto en el que la aplicación se ejecutará
+RUN mvn clean package -DskipTests
+
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+COPY --from=build /app/target/TramarsaERP.jar /app/TramarsaERP.jar
+
 EXPOSE 8080
 
-# Pasar las variables de entorno al JAR y ejecutar la aplicación
 CMD ["sh", "-c", "java -jar /app/TramarsaERP.jar \
     --server.port=${SERVER_PORT} \
     --datasource.url=${DATASOURCE_URL} \
