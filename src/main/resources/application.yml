@@ -1,0 +1,26 @@
+server:
+  port: 8000
+
+datasource:
+  driver-class-name: org.postgresql.Driver
+  url: ${DATASOURCE_URL}
+  username: ${DATASOURCE_USERNAME}
+  password: ${DATASOURCE_PASSWORD}
+
+jpa:
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+      jdbc:
+        time_zone: UTC
+  hibernate:
+    ddl-auto: update
+  show-sql: true
+
+security:
+  jwt:
+    private:
+      key: ${PRIVATE_KEY}
+    user:
+      generator: ${USER_GENERATOR}
