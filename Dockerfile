@@ -11,7 +11,7 @@ FROM openjdk:17-jdk-slim
 
 WORKDIR /app
 
-COPY --from=build /app/target/TramarsaERP.jar /app/TramarsaERP.jar
+COPY --from=build /app/target/TramarsaERP-0.0.1-SNAPSHOT.jar /app/TramarsaERP.jar
 
 EXPOSE 8080
 
