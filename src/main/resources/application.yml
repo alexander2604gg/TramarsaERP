@@ -1,26 +1,27 @@
 server:
   port: 8000
 
-datasource:
-  driver-class-name: org.postgresql.Driver
-  url: jdbc:postgresql://dpg-crkvvbm8ii6s73et7v1g-a.oregon-postgres.render.com:5432/tramarsa_erp
-  username: tramarsa_erp_user
-  password: y0bip0mPG2mh70x4fiUTY7vhsIWR9nf7
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://dpg-crkvvbm8ii6s73et7v1g-a.oregon-postgres.render.com:5432/tramarsa_erp
+    username: tramarsa_erp_user
+    password: y0bip0mPG2mh70x4fiUTY7vhsIWR9nf7
 
-jpa:
-  properties:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          time_zone: UTC
     hibernate:
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-      format_sql: true
-      jdbc:
-        time_zone: UTC
-  hibernate:
-    ddl-auto: update
-  show-sql: true
+      ddl-auto: update
+    show-sql: true
 
-security:
-  jwt:
-    private:
-      key: alexandersaul26
-    user:
-      generator: alexandersaul
+  security:
+    jwt:
+      private:
+        key: alexandersaul26
+      user:
+        generator: alexandersaul
