@@ -1,6 +1,8 @@
 package com.alexandersaul.TramarsaERP.controller;
 
+import com.alexandersaul.TramarsaERP.constants.ResponseConstants;
 import com.alexandersaul.TramarsaERP.dto.buque.CreateBuqueDTO;
+import com.alexandersaul.TramarsaERP.dto.response.ResponseDTO;
 import com.alexandersaul.TramarsaERP.service.IBuqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,11 +17,11 @@ public class BuqueController {
     private IBuqueService buqueService;
 
     @PostMapping
-    private ResponseEntity<Void> createBuque (@RequestBody CreateBuqueDTO createBuqueDTO){
+    public ResponseEntity<ResponseDTO> createBuque (@RequestBody CreateBuqueDTO createBuqueDTO){
         buqueService.createBuque(createBuqueDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(null);
+                .body(new ResponseDTO(ResponseConstants.STATUS_201 , ResponseConstants.MESSAGE_201));
     }
 
 }
