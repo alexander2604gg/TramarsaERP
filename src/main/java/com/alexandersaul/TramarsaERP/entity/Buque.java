@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "Buque" , schema = "agenciamiento")
 public class Buque {
     @Id
-    @Column(name = "imo", length = 9, nullable = false)
+    @Column(name = "imo", length = 7, nullable = false)
     private String imo;
     @Column(length = 50 )
     private String nombre;

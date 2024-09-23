@@ -5,6 +5,7 @@ import com.alexandersaul.TramarsaERP.dto.buque.CreateBuqueDTO;
 import com.alexandersaul.TramarsaERP.dto.buque.ResponseBuqueDTO;
 import com.alexandersaul.TramarsaERP.dto.response.ResponseDTO;
 import com.alexandersaul.TramarsaERP.service.IBuqueService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class BuqueController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseDTO> createBuque (@RequestBody CreateBuqueDTO createBuqueDTO){
+    public ResponseEntity<ResponseDTO> createBuque (@RequestBody @Valid CreateBuqueDTO createBuqueDTO){
         buqueService.createBuque(createBuqueDTO);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
