@@ -3,6 +3,7 @@ package com.alexandersaul.TramarsaERP.service.impl;
 import com.alexandersaul.TramarsaERP.dto.buque.CreateBuqueDTO;
 import com.alexandersaul.TramarsaERP.dto.buque.ResponseBuqueDTO;
 import com.alexandersaul.TramarsaERP.entity.Buque;
+import com.alexandersaul.TramarsaERP.exception.ResourceNotFoundException;
 import com.alexandersaul.TramarsaERP.mapper.BuqueMapper;
 import com.alexandersaul.TramarsaERP.repository.BuqueRepository;
 import com.alexandersaul.TramarsaERP.service.IBuqueService;
@@ -34,7 +35,7 @@ public class BuqueServiceImpl implements IBuqueService{
     @Override
     public ResponseBuqueDTO findByImo(String imo) {
         Buque buque = buqueRepository.findById(imo).orElseThrow(
-                () -> null
+                () -> new ResourceNotFoundException("Buque" , "imo" , imo)
         );
         return buqueMapper.toDto(buque);
     }

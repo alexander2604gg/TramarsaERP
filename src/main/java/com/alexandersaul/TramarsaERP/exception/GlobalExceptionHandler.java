@@ -1,6 +1,7 @@
 package com.alexandersaul.TramarsaERP.exception;
 
 import com.alexandersaul.TramarsaERP.dto.response.ErrorResponseDTO;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -39,6 +40,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(validationErrors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Map<String, String>> handleConstraintViolationException(ConstraintViolationException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getConstraintViolations().forEach(violation -> {
+            String fieldName = violation.getPropertyPath().toString();
+            String errorMessage = violation.getMessage();
+            errors.put(fieldName, errorMessage);
+        });
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGlobalException(Exception exception,
                                                                   WebRequest webRequest) {
@@ -49,6 +64,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(errorResponseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> handleResourceNotFoundException(Exception exception,
+                                                                  WebRequest webRequest) {
+        ErrorResponseDTO errorResponseDTO = new ErrorResponseDTO(
+                webRequest.getDescription(false),
+                HttpStatus.NOT_FOUND,
+                exception.getMessage(),
+                LocalDateTime.now()
+        );
+        return new ResponseEntity<>(errorResponseDTO, HttpStatus.NOT_FOUND);
     }
 
 }
