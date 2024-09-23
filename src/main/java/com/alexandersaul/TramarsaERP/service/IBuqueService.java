@@ -9,5 +9,6 @@ public interface IBuqueService {
 
     void createBuque (CreateBuqueDTO createBuqueDTO);
     List<ResponseBuqueDTO> getAllBuques();
+    ResponseBuqueDTO findByImo (String imo);
 
 }

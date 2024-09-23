@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BuqueRepository extends CrudRepository<Buque , Long> {
+public interface BuqueRepository extends CrudRepository<Buque , String> {
 }

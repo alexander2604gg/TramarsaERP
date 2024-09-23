@@ -31,4 +31,12 @@ public class BuqueServiceImpl implements IBuqueService{
         return buqueMapper.toListDto(buqueList);
     }
 
+    @Override
+    public ResponseBuqueDTO findByImo(String imo) {
+        Buque buque = buqueRepository.findById(imo).orElseThrow(
+                () -> null
+        );
+        return buqueMapper.toDto(buque);
+    }
+
 }

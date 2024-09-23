@@ -12,5 +12,6 @@ public interface BuqueMapper {
 
     Buque toEntity (CreateBuqueDTO createBuqueDTO);
     List<ResponseBuqueDTO> toListDto (List<Buque> buqueList);
+    ResponseBuqueDTO toDto (Buque buque);
 
 }
